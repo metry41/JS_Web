@@ -1,0 +1,37 @@
+ * {box-sizing: border-box;}
+ body{width: 80%; 
+     margin: 2em auto;
+     background-color: silver
+     }
+ form{
+     background-color: steelblue;
+ }  
+ legend{
+     background-color: navy;
+     color: white;
+ } 
+ div#izq{
+     width: 50%;
+     float: left;
+     color: white;
+     
+ } 
+ div#dcha{
+     width: 50%;
+     float: left;
+     color: white;
+ }
+ div.label{
+     width: 50%;
+     float: left;
+     color: white;
+     line-height: 130%
+ }
+ div#ci{
+     width: 70%;
+     float: left
+ }
+  div#cd{
+     width: 30%;
+     float: left
+ }

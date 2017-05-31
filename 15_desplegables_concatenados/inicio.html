@@ -1,0 +1,99 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<title>Opciones dependientes</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Ejercicios de clase">
+        <meta name="author" content="Alvaro">
+        <meta name="keywords" content="ejercicios">
+        <link rel="shortcut icon" href="fav_icon.png">
+		<script>
+
+
+			function main() {	//envio de evento a la funcion manejadora.
+			    var aGeneros = ["Ciencias", "Salud", "Arte", "Informática", "Letras"];
+			    var oAutores = {
+			        "Ciencias": ["Ing. Caminos", "Ing. Teleco", "Ing. Aeronáutica", "Ing. Industrial", "Ciencias exactas"], 
+			        "Salud": ["Medicina", "Odontología", "Veterinaria", "Enfermería"],
+			        "Arte": ["Bellas artes", "Esculturismo"], 
+			        "Informática": ["Ing. Informática", "Ing. Circuitos"],
+			        "Letras": ["Filología", "Derecho", "Historia", "Publicidad", "Periodismo", "Turismo xD"] 
+			    };
+			    var sSelectedGenero;
+			    var sSelectedAutor;
+                // nodos del DOM
+			    var domSelecGeneros = document.querySelector("#generos");
+			    var domSelecAutores = document.querySelector("#autores");
+			    var domBoton = document.getElementById('boton');
+                //manejadores
+			    domSelecGeneros.addEventListener("change", cambioGenero);
+			    domSelecAutores.addEventListener("change", cambioAutores);
+			    domBoton.addEventListener("click", enviar);
+			    // configuración inicial
+			    domSelecAutores.disabled = true;
+			    domBoton.disabled = true;
+			    cargarSelect(domSelecGeneros, aGeneros);
+
+			    function enviar() {
+			        return confirm("Desaa ver las asignaturas de " + sSelectedAutor);
+			    }
+
+			    function cambioAutores(oE) {
+			        var domSelect = oE.currentTarget;
+			        if (domSelect.childElementCount > oAutores[sSelectedGenero].length) {
+			            domSelect.removeChild(domSelect.children[0]);
+			        }
+			        var nSelect = domSelect.selectedIndex;
+			        var domOption = domSelect.options[nSelect]
+			        sSelectedAutor = domOption.text;
+			        domBoton.disabled = false;
+			    }
+
+			    function cambioGenero(oE) {
+			        var domSelect = oE.currentTarget;
+			        if (domSelect.childElementCount > aGeneros.length) {
+			            domSelect.removeChild(domSelect.children[0]);
+			        }
+			        var nSelect = domSelect.selectedIndex;
+			        var domOption = domSelect.options[nSelect];
+			        sSelectedGenero = domOption.text;
+			        cargarSelect(domSelecAutores, oAutores[sSelectedGenero]);
+			        domSelecAutores.disabled = false;
+			    }
+
+			    function cargarSelect(oDom, aDatos) {
+			        oDom.innerHTML = "<option> </option>";
+			        domBoton.disabled = true;
+			        for (var i = 0; i < aDatos.length; i++) {
+			            oDom.innerHTML += "<option>" + aDatos[i] + "</option>";
+			        }
+			    }
+			};//fin del onload
+
+
+			if (document.addEventListener) {
+			    document.addEventListener("DOMContentLoaded", main, false);
+			    //metodo de DOM nivel 2  que indica al agente de usuario que permanezca atento:
+			    // evento: en este caso la carga completa de la página
+			    // función a lanzar: en este caso iniciaBoton
+			    // orden del flujo de eventos: false salta la fase de captura
+			} else {
+			    window.onload = main;
+			}
+
+		</script>
+	</head>
+	<body>
+		<h1>Formulario</h1>
+		<form  name="formulario" id="formulario">			
+            <select name="Generos" id="generos">
+            </select>
+            <select name="Autores" id="autores">
+            </select>
+            <button type="button" name="boton" id="boton">Asignaturas</button>					
+		</form>
+		<p id="parrafo"> </p>
+	</body>
+</html>

@@ -1,0 +1,1 @@
+window.open(www.elmundo.es,(_blank))
